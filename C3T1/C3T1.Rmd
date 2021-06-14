@@ -1,0 +1,166 @@
+---
+title: "Data Analytics C3T1"
+output:
+  html_document:
+    df_print: paged
+---
+
+### Installing 
+
+Installing R and Rstudio is as simple as searching for the current versions in the web, download and install.  
+Becoming Familiar with RStudio was very tricky as it has a lot of functionality built in, so i spent hours looking through tutorials and videos.  
+Notebooks became my favorite way to use it as it resembles Python Jupyter Notebooks, you have chuncks of both code and annotations which you can then Knit it into an easy to follow HTML file (or more likely preview it on the Viewer window).  
+
+### Useful Shortcuts
+
+I became familiar with a couple of shortcuts to make life easier:  
+
+(@) ctrl+shift+k = preview HTML file on the viewer window  
+(@) double space at the end of a line to display it as a new paragraph on the HTML file  
+(@) ctrl+alt+i = creates code chunk  
+(@) You can create snippets under tools and Global options to code faster, I started using this for graphs:  
+```
+snippet plt  
+	ggplot(${1:data}) +   
+		geom_${2:geom}(aes(${3:aes}),${4:colour})
+```  
+		
+(@) you can skip letters when trying to use auto fill to find the functions faster  
+(@) To run a single line of code in a chunck use ctrl+enter
+(@) To run the entire chunck of code ctrl+shift+enter
+(@) In Markdown/Notebooks if you dont put {r} it will not run code but it will appear as code on preview.
+(@) you can navigate faster through the code using the subtitles pane on the top left
+
+### Installing Packages 
+
+I could use the usual command ```install.packages("package")``` but there's also a pacman to copy paste all the packages I need, it installs and loads them at the same time (though i have to be wary of how many I load at the time as they might not be needed for some projects):  
+
+
+```{r}
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, mlbench, jquerylib, farver, corrgram, caTools)
+```
+
+### Uploading Data
+
+Though both these data sets are in RStudio already, for the sake of completeness I will import them and save them into a data frame. I'm using rio for importing data as it can import csv, txt, and more using the same command.
+```{r}
+cars <- import("cars.csv")
+iris <- import("iris.csv")
+
+```
+
+### EDA (Exploratory Data Analysis)
+
+```
+attributes(iris) # gives a list of attributes, not that good
+attributes(cars)
+
+summary(iris)  #gives calculated stats like min, max, median, Quartiles.
+summary(cars)
+
+str(iris)  #gives structures of each columns (chr, int, etc)
+str(cars)
+
+names(iris)  # gives names of all columns (attributes)
+names(cars)
+
+iris$Sepal.Length  # gives the rows of that particular column of the data set.
+```
+### Simple plotting with ggplot2 (Grammar of Graphs)
+
+```{r}
+ggplot(iris) + 
+  geom_point(aes(Petal.Length, Petal.Width, colour = Species)) +
+  labs(title = "Iris Data Set - Simple Scatter") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(iris) + 
+  geom_histogram(aes(Petal.Length, fill = Species), alpha = 0.6, position = 'identity') +
+  labs(title = "Iris Data Set - Simple Histogram") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(iris) + 
+  aes(sample= Petal.Length, colour = Species) +
+  geom_qq_line() +
+  geom_qq() +
+  xlab("Theoretical") + ylab("Sample") +
+  labs(title = "Iris Data Set - QQPlot") +
+  theme(plot.title = element_text(hjust = 0.5))
+```   
+
+### Preprocessing Data
+
+You can change data type using something like: ``` iris$Species <- as.factor(iris$Species)```  
+Check for NA values with ``` is.na(iris)```
+Changing the names of columns (attributes) ``` names(cars) <- c("Name", "Speed", "Distance")```
+
+```{r}
+iris$Species <- as.factor(iris$Species)
+names(cars) <- c("Name", "Speed", "Distance")
+```
+
+### Modeling
+
+You can do modeling manually by dividing the data, training, testing, etc, but I found a lot of this functionality is already incorporated into ggplot and can be used for both visualizing and analyzing the data.
+
+```{r}
+set.seed(132)
+
+inTrain_cars <- createDataPartition(y = cars$Distance, p = .75, list = FALSE)
+#inTrain_cars <- initial_split(cars$Distance, prop = 3/4)
+training_cars <- cars[ inTrain_cars,] 
+testing_cars <- cars[-inTrain_cars,]
+
+inTrain_iris <- createDataPartition(y = iris$Petal.Length, p = .75, list = FALSE)
+training_iris <- iris[ inTrain_iris,] 
+testing_iris <- iris[-inTrain_iris,]
+
+nrow(training_cars) # gives you the number of rows allocated towards training
+nrow(testing_cars)
+
+ggplot(cars, aes(Distance, Speed)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs( title = "Predicting Distance using Speed") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+  geom_point() +
+  geom_smooth(method = "lm") + # Predicting y using x (y ~ x)
+  labs( title = "Predicting Petal Width using Petal Length") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm") + # Predicting y using x (y ~ x)
+  labs( title = "Predicting Petal Width using Petal Length") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+lm_cars <- lm(Distance ~ Speed, data = training_cars) 
+lm_iris <- lm(Petal.Length ~ Petal.Width, data = training_iris)
+
+summary(lm_cars)
+summary(lm_iris)
+
+```
+
+### Predictions
+
+These are predictions made using the ``` predict() ``` command in the future i will look into visualizing the results using a confusion matrix or even better, using ggplot to do the statistics for me, visualize it, and the extract the results of the calculations from ggplot. 
+
+```{r}
+pred_iris <- predict(lm_iris, testing_iris)
+pred_cars <- predict(lm_cars, testing_cars)
+
+data.frame(pred_iris)
+data.frame(pred_cars)
+```
+### Conclusion
+
+Here are the predictions for the Distance a car travels using the speed, and the length of a petal using the petal width.  
+
+As far as errors and warning messages go, I had a tonne, most were conserning packages that werent loaded/installed, but once i could figure that out, it was easy.  
+
+I spent at least 6hrs learning the theory behind ggplot with the help of an online semminar explaining the reasoning behind the divide between data, aesthetics, geometry, scales, statistics, coordinates, theme, etc... and now i feel confident enough that i can use ggplot to solve almost any data visualization/analysis without too much trouble. It was worth it :).
+
