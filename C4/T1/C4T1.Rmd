@@ -1,0 +1,343 @@
+---
+title: "C4T1"
+output:
+  html_document:
+    df_print: paged
+---
+
+'Smart Home' Project
+
+Objective: To find evidence to help support marketing claims of sub-meters providing owners with 'useful' power usage analytics. Perform an analytical deep dive of sub-metering generated data and producing high quality visualizations taht support a positive narrative around the findings.  
+
+Data: 47 months of energy usage data  
+
+### IOT Analytics and their onboarding process:   
+
+(@) Conduct research to become informed on the client's business
+(@) Identify any analytic skill/knowledge gaps foreseen for the project and plug those gaps with self-learning. 
+(@) Perform an initial exploration of the data
+(@) Hold a project kick-off meeting with the client to close the deal
+
+Produce a PPT for the home developer's management team.  
+
+Include:  
+1. How we will conduct the analysis  
+2. What they're likely to gain   
+3. Keep in mind this is business people not technical  
+
+**Produce an initial report for IOT Analytics' clients. PPT including initial insights of business relevance.**
+
+### Research the Domain
+
+- What role do sub-meters play in the power industry?  
+- What kinds of power usage analytics are currently offered?  
+- What can be learned from the analytics?  
+- What are the benefits to consumers?  
+
+Also analyze the data before making the EDA;
+
+- How is power measured?  
+- In what kind of units?  
+- What household areas are each of the sub-meters measureing?  
+- Is there additional power and power realted information that would benefit analytics in the future if added to the data set?  
+- Are there any changes to the sub-metering data collection structure that would help future analytics?  
+
+#### Take aways from Predictive Analytics Myths  
+
+Summary  
+
+Although Predictive Analytics is a powerful optimization technique, it is not always the best 
+solution. Even though we know that nothing in life is 100% guaranteed, we often overlook this 
+fact of life in the way we use predictive analytics for our daily business use. In reality the 
+projects that drive measurable business results encompass more than just good models. They 
+typically incorporate an effective process such as Aryng’s BADIR™: 5 steps from "data to 
+decisions"™ framework. Key takeaways from this paper are:  
+
+1. Process (BADIR) is key to good business result
+2. Right Talent + Good Tools = Great Models © Aryng LLC 2011 - 2013. All Rights Reserved.
+3. Models needs to be maintained
+4. Models are not perfect
+5. Use simpler techniques till PA can be justified
+
+#### Dplyr Summary
+
+- *Piping* - chaining 2+ functions together using the pipe operator or %>%. Use pipe betwen two functions you want to combine, executed in the order they're written. The result of the first funciton is transfered into the second.  
+
+- inside dplyr "<-" doesnt exist, we use "=" instead  
+- no quotes used around variable names (some exeptions)  
+- do not use $ to refer to variables within data frame, the pipe auto does it.  
+
+Basic Struture
+
+**new.df <- old.df %>% function1(.) %>% function2(.)**
+
+this creates a new data frame from an old one, where the old is dumped into function1 and then the results are dumped into function2. 
+
+Using the pipe operator i dont need to input the data frame as the first argument. 
+
+Some helpful functions: 
+
+- filter(df, Prey.species != "Unknown" & nchar(Prey.species) > 0)
+- mutate(Prey.species = tolower(Prey.species))
+- group_by(Lion.ID, Prey.species) This will show the number of species that each lion killed.  
+- summarise( nb_killed = sum(State..kill..1..or.non.kill..0..)) This aggregates the results of the previews one
+- arrange(desc(nb_kille)) arranges in decending order 
+- select(Lion = Lion.ID,                renames the columns at the end
+         Prey = Prey.species,
+         nb_killed)
+         
+### Data Collection
+
+```{r, results='hide'}
+
+#only need once
+#install.packages("RMariaDB")
+#library(RMariaDB)
+```
+
+```{r}
+require(pacman)
+
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, ggthemes, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, jquerylib, farver, corrgram, caTools, cowplot, randomForest, RMariaDB, lubridate, zoo, scales)
+```
+
+#### Creating a Database connection
+
+```{r}
+con = dbConnect(MariaDB(), user='deepAnalytics', password='Sqltask1234!', 
+                dbname='dataanalytics2018', host='data-analytics-2018.cbrosir2cswx.us-east-1.rds.amazonaws.com')
+
+dbListTables(con)
+```
+
+Using the dbListsFields function you can learn the attributes associated with a particular table (yr_2006).  
+```{r}
+## Lists attributes contained in a table
+dbListFields(con, 'yr_2006')
+```
+
+#### Pulling the necessary data into R
+
+```{r}
+yr_2006 <- dbGetQuery(con, "SELECT Date, Time, Sub_metering_1, Sub_metering_2, Sub_metering_3 FROM yr_2006")
+yr_2007 <- dbGetQuery(con, "SELECT Date, Time, Sub_metering_1, Sub_metering_2, Sub_metering_3 FROM yr_2007")
+yr_2008 <- dbGetQuery(con, "SELECT Date, Time, Sub_metering_1, Sub_metering_2, Sub_metering_3 FROM yr_2008")
+yr_2009 <- dbGetQuery(con, "SELECT Date, Time, Sub_metering_1, Sub_metering_2, Sub_metering_3 FROM yr_2009")
+yr_2010 <- dbGetQuery(con, "SELECT Date, Time, Sub_metering_1, Sub_metering_2, Sub_metering_3 FROM yr_2010")
+
+```
+
+#### Investigation of Data
+
+```{r}
+
+
+head(yr_2006)
+tail(yr_2006)
+#--------------
+head(yr_2007)
+tail(yr_2007)
+#--------------
+head(yr_2008)
+tail(yr_2008)
+#--------------
+head(yr_2009)
+tail(yr_2009)
+#--------------
+head(yr_2010)
+tail(yr_2010)
+```
+This tells me that 2006 and 2010 we dont have complete data for all the days. 2006 has 16-Dec to 31-Dec; 2010 has 1-Jan to 26-Nov. 
+
+#### Combining tables into one dataFrame using dplyr
+
+```{r}
+alldata <- bind_rows(yr_2007,yr_2008, yr_2009)
+
+head(alldata)
+tail(alldata)
+```
+
+Data is in the correct order! :)
+
+#### Combine Date and Time
+
+```{r}
+alldata <- cbind(alldata, paste(alldata$Date, alldata$Time),
+                 stringsAsFactors=FALSE)
+
+### Giving the new attribute a name
+
+colnames(alldata)[6] <- "DateTime"
+
+alldata <- alldata[,c(ncol(alldata), 1:(ncol(alldata)-1))]
+head(alldata)
+
+```
+
+#### Changing data to POSIXct
+
+```{r}
+alldata$DateTime <- as.POSIXct(alldata$DateTime, tz="Europe/Paris",  "%Y-%m-%d %H:%M:%S")  #converts from charac to POSIXct
+#attr(alldata$DateTime, "tzone") <- "Europe/Paris"  #adds time zone to avoid problems
+str(alldata)
+
+head(alldata)
+```
+
+#### Lubridate to extract data
+
+```{r}
+alldata$year <- year(alldata$DateTime)
+alldata$quarter <- quarter(alldata$DateTime)
+alldata$month <- month(alldata$DateTime)
+alldata$week <- week(alldata$DateTime)
+alldata$weekdays <- weekdays(alldata$DateTime)
+alldata$day <- day(alldata$DateTime)
+alldata$hour <- hour(alldata$DateTime)
+head(alldata)
+
+```
+
+### Data Documentation
+
+Each sub-meter is measured in watt-hour and is the energy consumed in:  
+
+Energy sub-metering 1 = kitchen (dishwasher, oven, microwave)  
+Energy sub-metering 2 = laundry room (washing machine, tumble drier, refrigerator, light)  
+Energy sub-metering 3 = electric water heater and Air Conditioner.  
+
+- can you find what is using the most power? the least?  
+- anything to learn from the min and max?  
+- Research other basic statistics  
+
+```{r}
+alldata %>% select(Sub_metering_1, Sub_metering_2, Sub_metering_3, year) %>% filter(year == 2007) %>% summary()
+alldata %>% select(Sub_metering_1, Sub_metering_2, Sub_metering_3, year) %>% filter(year == 2008) %>% summary()
+alldata %>% select(Sub_metering_1, Sub_metering_2, Sub_metering_3, year) %>% filter(year == 2009) %>% summary()
+```
+
+```{r}
+group_by(alldata, year) %>%
+  summarise(Energy_Meter_1 = sum(Sub_metering_1), 
+            Energy_Meter_2 = sum(Sub_metering_2),
+            Energy_Meter_3 = sum(Sub_metering_3))
+
+
+```
+Why are there so many NA values? Lets check:
+
+```{r}
+alldata[!complete.cases(alldata),]
+```
+
+By checking the times and dates of the NA values, we can see that this is due to a time change. Probably in the last week of March there is a change in time so the time zone of Europe/Paris doesn't recognize this as a valid time/date, therefore, it stores the value as NA until its not an issue. This happens for all three years. 
+
+#### Summary of values
+
+
+- Can you find what is using the most power? the least?  
+
+**Sub_metering_3** is what shows the most power consumption of all with about **3 Million Watt-hours per year**, this corresponds to the electric water heater and Air conditioner. It also appears to be the one with the lowest Maximum energy consumption per minute with about 30 watt-hours, by comparison the other two sub meters are more than double. 
+
+**Sub_metering_1** is the one with the least power consumption with around **600,000 watt-hours per year** and a maximum of about 77 watt-hours per minute. This corresponds to the kitchen (dishwasher, oven, microwave)
+
+- Anything to learn from the min and max? 
+
+The kitchen and laundry room appliances might consume the most power per minute but because they aren't used as often, the overall consumption cost depends mainly on the electric water heater and air conditioning power management.
+
+### High-level Recommendations
+
+Thermostat set point  
+Outdoor temps  
+dedicated submeters for heater and cooling  
+
+
+This energy information coming to and from your home through your smart meter can be run through a home energy management System (EMS), which will allow you to view it in an easy-to-understand format on your computer or hand-held device. A home EMS allows you to track your energy use in detail to better save energy. For instance, you can see the energy impact of various appliances and electronic products simply by monitoring your EMS while switching the devices on and off.
+
+An EMS also allows you to monitor real-time information and price signals from your utility and create settings to automatically use power when prices are lowest. You can also choose settings that allow specific appliances and equipment to turn off automatically when a large demand threatens to cause an outage—avoiding peak demand rates, helping to balance the energy load in your area, and preventing blackouts. Your utility may provide financial incentives for doing so.
+
+### Extra - Data Visualizations (part of task 2)
+
+```{r}
+
+ggplot(alldata) + 
+  geom_point(aes(DateTime, Sub_metering_1, colour=year))
+
+ggplot(alldata) + 
+  geom_point(aes(DateTime, Sub_metering_2, colour=year))
+
+ggplot(alldata) + 
+  geom_point(aes(DateTime, Sub_metering_3, colour=year))
+```
+
+```{r}
+alldata1 <- filter(alldata, is.na(alldata)==FALSE)
+
+ggplot(alldata1) + 
+  geom_point(aes(month, Sub_metering_1, )) +
+  stat_summary(aes(month, Sub_metering_1), fun = mean, geom = 'point', colour = 'red', size = 4) + 
+  facet_grid(~ year) # two variablies 
+```
+```{r}
+ggplot(alldata1) + 
+  #geom_point(aes(month, Sub_metering_1, )) +
+  stat_summary(aes(month, Sub_metering_1), fun = mean, geom = 'point', colour = 'red', size = 3) + 
+  facet_grid(~ year) # two variablies 
+
+ggplot(alldata1) + 
+  #geom_point(aes(month, Sub_metering_1, )) +
+  stat_summary(aes(month, Sub_metering_1, colour = year), fun = sum, geom = 'point', size = 3) + 
+  facet_grid(~year) +
+  scale_color_continuous(breaks = c(2007, 2008, 2009))+
+  scale_x_continuous(breaks=c(2,4,6,8,10,12))+
+  labs(title = "Total amount of Energy Consumed each Month", 
+       x = "Month", 
+       y = "Sub Metering 1 (watt-hour)")
+
+ggplot(alldata1) + 
+  #geom_point(aes(month, Sub_metering_1, )) +
+  stat_summary(aes(month, Sub_metering_2, colour = year), fun = sum, geom = 'point', size = 3) + 
+  facet_grid(~year) +
+  scale_color_continuous(breaks = c(2007, 2008, 2009))+
+  scale_x_continuous(breaks=c(2,4,6,8,10,12))+
+  labs(title = "Total amount of Energy Consumed each Month", 
+       x = "Month", 
+       y = "Sub Metering 2 (watt-hour)")
+
+ggplot(alldata1) + 
+  #geom_point(aes(month, Sub_metering_1, )) +
+  stat_summary(aes(month, Sub_metering_3, colour = year), fun = sum, geom = 'point', size = 3) + 
+  facet_grid(~year) +
+  scale_color_continuous(breaks = c(2007, 2008, 2009))+
+  scale_x_continuous(breaks=c(2,4,6,8,10,12))+
+  labs(title = "Total amount of Energy Consumed each Month", 
+       x = "Month", 
+       y = "Sub Metering 3 (watt-hour)")
+
+
+
+```
+
+```{r}
+dummy <- data.frame(Time = alldata1$DateTime,
+                    GHI = rnorm(length(alldata1$DateTime)))
+
+df <- mutate(dummy,
+             Yearmon = as.yearmon(alldata1$DateTime)) %>%
+  group_by(Yearmon) %>%
+  summarise(GHI_sum = sum(GHI)) %>%
+  ungroup() %>%
+  mutate(Yearmon = as.Date(Yearmon))
+
+ggplot(df, aes(Yearmon, GHI_sum)) + 
+  geom_line()+
+  scale_x_date(labels= date_format("%m/%Y"))
+
+#ggplot(alldata1) + 
+#  geom_point(aes(month, Sub_metering_1, group=month)) +
+#  facet_grid(~ year)
+
+
+```
+
