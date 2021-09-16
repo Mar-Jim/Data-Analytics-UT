@@ -1,0 +1,128 @@
+---
+title: "C3T3"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+require(pacman)
+
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, ggthemes, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, jquerylib, farver, corrgram, caTools, cowplot, randomForest, RMariaDB, lubridate, zoo, scales, ggfortify, forecast, doParallel, e1071, explore, dlookr, corrplot)
+```
+
+###Objective:  
+  
+They have asked our team to analyze historical sales data and then make sales volume predictions for a list of new product types  
+  
+- Predicting sales of four different product types: PC, Laptops, Netbooks and Smartphones.  
+- Assessing the impact services reviews and customer reviews have on sales of different product types.  
+###Importing Data
+```{r}
+df1 <- import("existingproductattributes2017.csv")
+df2 <- import("newproductattributes2017.csv")
+
+#str(df1)
+#names(df1)
+
+df1 <- select(df1, -c(ProductNum, BestSellersRank, ProductWidth, ProductHeight, ProductDepth,ShippingWeight,ProfitMargin))
+
+df2 <- select(df2, -c(ProductNum, BestSellersRank, ProductWidth, ProductHeight, ProductDepth,ShippingWeight,ProfitMargin))
+
+#names(df1)
+```
+
+###Correlation Plot
+
+```{r}
+Dummy <- dummyVars(" ~ .", data = df1)
+df11 <- data.frame(predict(Dummy, newdata = df1))
+
+Dummy2 <- dummyVars(" ~ .", data = df2)
+df22 <- data.frame(predict(Dummy, newdata = df2))
+#is.na(df11)
+#explore(df11)
+#df11
+corrplot(cor(df11), method = "square", tl.cex=0.5)
+```
+###Building Models
+```{r, results="hide"}
+set.seed(107)
+inTrain <- createDataPartition(y = df11$Volume, p = .75, list = FALSE)
+training <- df11[ inTrain,]
+testing <- df11[-inTrain,]
+
+ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3, classProbs = FALSE)
+
+RF <- train(Volume~., data = training, method = "rf", tuneLength = 2, trControl=ctrl)
+GBM = train(Volume ~., data=training, method="gbm", trControl=ctrl)
+SVM <- train(Volume~., data = training, method = "svmLinear", trControl=ctrl, tuneLength = 5)
+```
+
+
+```{r}
+importanceRF = varImp(RF, scale=TRUE)
+importanceRF
+```
+###RMSE of 1st Models
+
+```{r}
+RF
+GBM
+SVM
+```
+
+###2nd Try at Modelling
+
+What if i get rid of the productype and price which dont have much impact/importance on the modelling?
+Second round of modelling:
+```{r, results="hide"}
+RF2 <- train(Volume~ x5StarReviews + x4StarReviews  + x3StarReviews  + x2StarReviews + x1StarReviews + PositiveServiceReview + NegativeServiceReview + Recommendproduct + Price, data = training, method = "rf", tuneLength = 2, trControl=ctrl)
+
+GBM2 = train(Volume ~x5StarReviews + x4StarReviews  + x3StarReviews  + x2StarReviews + x1StarReviews + PositiveServiceReview + NegativeServiceReview + Recommendproduct + Price, data=training, method="gbm", trControl=ctrl)
+
+SVM2 <- train(Volume~x5StarReviews + x4StarReviews  + x3StarReviews  + x2StarReviews + x1StarReviews + PositiveServiceReview + NegativeServiceReview + Recommendproduct + Price, data = training, method = "svmLinear", trControl=ctrl, tuneLength = 5)
+```
+
+
+```{r}
+importanceRF2 = varImp(RF2, scale=TRUE)
+importanceRF2
+```
+###RMSE of 2nd Models
+
+```{r}
+RF2
+GBM2
+SVM2
+```
+
+Since it does not make much of a difference, I will keep the original models and make predictions to assess the quality of each model.
+
+###Predicions
+
+```{r}
+RFpred <- predict(RF, newdata = testing)
+GBMpred <- predict(GBM, newdata = testing)
+SVMpred <- predict(SVM, newdata = testing)
+
+RFpred
+GBMpred
+SVMpred
+
+```
+###Applying Predictions
+
+```{r}
+RFpred2 <- predict(RF, newdata = df22)
+```
+
+```{r}
+output <- df2 
+output$predictions <- RFpred2
+
+head(output)
+
+#write.csv(output, file="C3T3 Predictions.csv", row.names = TRUE)
+```
+
