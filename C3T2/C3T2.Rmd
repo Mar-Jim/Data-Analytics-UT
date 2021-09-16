@@ -1,0 +1,210 @@
+---
+title: "Data Analytics C3T2"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+### Objectives
+
+One of the objectives of the survey was to find out which of two brands of computers our customers prefer.  
+
+I would like you to run and optimize at least two different decision tree classification methods in R - C5.0 and RandomForest
+
+### Importing Data & Libraries
+
+```{r}
+require(pacman)
+
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, ggthemes, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, jquerylib, farver, corrgram, caTools, cowplot, randomForest,doParallel,e1071)
+```
+
+```{r}
+CR <- import("CompleteResponses.csv")
+SI <- import("SurveyIncomplete.csv")
+```
+
+### EDA
+
+```{r}
+names(CR)
+str(CR)
+
+#Changing brand to Categories and Assigning Brand Names
+CR$brand <- as.factor(CR$brand)
+levels(CR$brand) <- c("Acer", "Sony")
+
+```
+
+### Data Split
+
+```{r}
+set.seed(107)
+
+inTrain <- createDataPartition(y = CR$brand, p = .75, list = FALSE)
+training <- CR[ inTrain,]
+testing <- CR[-inTrain,]
+
+```
+
+
+### Modeling
+
+```{r, results="hide"}
+ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3, classProbs = TRUE)
+
+cl <- makeCluster(6)
+registerDoParallel(cl)
+GBM_Fit1 <- train(brand ~ ., data = training, method = "gbm", tuneLength = 1, trControl = ctrl, metric="Accuracy" )
+GBM_Fit2 <- train(brand ~ ., data = training, method = "gbm", tuneLength = 2, trControl = ctrl, metric="Accuracy")
+GBM_Fit3 <- train(brand ~ ., data = training, method = "gbm", tuneLength = 3, trControl = ctrl, metric="Accuracy")
+
+RF_Fit1 <- train(brand~., data = training, method = "rf", tuneLength = 1, trControl=ctrl, metric="Accuracy")
+RF_Fit2 <- train(brand~., data = training, method = "rf", tuneLength = 2, trControl=ctrl, metric="Accuracy")
+RF_Fit3 <- train(brand~., data = training, method = "rf", tuneLength = 3, trControl=ctrl, metric="Accuracy")
+
+RF_Fit4 <- train(brand~., data = training, method = "rf", tuneLength = 1, metric="Accuracy", trControl=trainControl(method = "cv", number = 10, classProbs = TRUE, savePredictions = "final"))
+stopCluster(cl)
+```
+
+
+### GBM Results
+
+By running ```GBM_Fit#``` on R. Since I specified a two Class Summary (A specialized function for 2 class data to measure performance) in the control parameters, the command returns the area under the ROC curve. ROC takes into account the Rate of True Positives and the Rate of False Positives, an ROC of 1.0 means 100% accurate predictions. 
+
+Changing the interaction depth allows for greater accuracy in the case of GBM.  Also, by running ```GBM_Fit3``` I get the results from the other two as well. 
+
+```{r}
+GBM_Fit3
+```
+
+### Random Forest Results
+
+Using this Random Forest command, it yields ROC numbers which don't change between iterations due to the nature of Random Forest. Furthermore, between the three iterations, feature importance scores dont seem to change that much.
+
+```{r}
+
+RF_Fit1
+RF_Fit2
+RF_Fit3
+
+```
+
+
+```{r}
+
+I1 = varImp(RF_Fit1, scale=TRUE)
+I2 = varImp(RF_Fit2, scale=TRUE)
+I3 = varImp(RF_Fit3, scale=TRUE)
+I1
+I2
+I3
+```
+However, during my research I encountered a different way of modeling random forest using ```randomForest()``` and creating some really nice visualizations.
+
+### Different Random Forest Modelling
+
+After some research, I found the ```randomForest()` command which can be used alongside ggplot to generate similar results and display them. By simply calling on the function, i get a confusion matrix of the values:  
+
+```{r}
+
+model <- randomForest(brand ~ ., data = CR, proximity = TRUE)
+model
+
+```
+### GGplot and Random Forest
+
+The ggplot is based on ```err.rate matrix```, a matrix calculated when constructing the model using ```randomForest()```.  It contains columns for the OOB (out of bag) error rate, Acer error rate, Sony error rate (how frequent those two get missed classified). Each row of the matrix represents the error rate after certain iterations of the random forest, so first row is the error rates after making the first tree, the 50th row shows the error rates after making the 50th tree and so on. 
+
+oob.error.data is created to transform the data into something ggplot can understand and plot. 
+
+Then using ```ggplot``` I can graph the matrix and evaluate whether the number of trees I selected are enough to stabilize the error rates. 
+
+```{r}
+
+head(model$err.rate)
+
+oob.error.data <- data.frame(
+  Trees=rep(1:nrow(model$err.rate), times=3),
+  Type=rep(c("OOB", "Acer", "Sony"), each=nrow(model$err.rate)),
+  Error=c(model$err.rate[,"OOB"],
+    model$err.rate[,"Acer"],
+    model$err.rate[,"Sony"]))
+
+
+
+ggplot(oob.error.data, aes(Trees, Error)) +
+  geom_line(aes(color=Type)) +
+  labs( title = "Error Rate of Random Forest") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+varImpPlot(model, pch = 20, main = "Importance of Variables")
+```
+After about 200 trees, the errors rates seem to stabilize and so using 500 trees to estimate is more than enough. 
+
+```{r}
+
+#oob.values <- vector(length=5)
+#for (i in 1:5){
+#  temp.model <- randomForest(brand ~ ., data=CR, mtry=i, ntree=1000)
+#  oob.values[i] <- temp.model$err.rate[nrow(temp.model$err.rate),1]
+#}
+
+#oob.values
+```
+This checks whether the default of 2 variables checked at each split is the most optimal solution for this.
+
+```{r}
+#distance.matrix <- dist(1-model$proximity)
+
+
+#mds.stuff <- cmdscale(distance.matrix, eig=TRUE, x.ret=TRUE)
+
+#mds.var.per <- round(mds.stuff$eig/sum(mds.stuff$eig)*100, 1)
+
+#mds.values <- mds.stuff$points
+#mds.data <- data.frame(Sample=rownames(mds.values),
+#                       X=mds.values[,1],
+#                       Y=mds.values[,2],
+#                       Status=CR$brand)
+
+
+
+```
+
+```{r}
+#ggplot(mds.data, aes(X,Y, label = Sample)) +
+#  geom_text(aes(color=Status))+
+#  theme_bw()+
+#  xlab(paste("MDS1 - ", mds.var.per[1], "%", sep = ""))+
+#  ylab(paste("MDS1 - ", mds.var.per[2], "%", sep = ""))+
+#  ggtitle("MDS Plot using (1 - Random Forest Proximities)")
+
+```
+### Predictions
+
+```{r}
+RFpred <- predict(model, newdata = testing)
+GBMpred <- predict(GBM_Fit3, newdata = testing)
+
+
+plot(RF_Fit3)
+plot(GBM_Fit3)
+```
+```{r}
+
+SI$brand <- as.factor(SI$brand)
+levels(SI$brand) <- c("Acer", "Sony")
+
+RFpred <- predict(model, newdata = SI)
+GBMpred <- predict(GBM_Fit3, newdata = SI)
+
+postResample(RFpred, SI$brand)
+postResample(GBMpred, SI$brand)
+
+summary(SI$brand)
+summary(RFpred)
+summary(GBMpred)
+
+```
+
