@@ -1,0 +1,138 @@
+---
+title: "C4T3"
+output: html_notebook
+---
+
+Objective: 
+
+Your job is to evaluate multiple machine learning models to see which produces the best result, enabling us to make a recommendation to the client. 
+
+```{r}
+require(pacman)
+
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, ggthemes, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, jquerylib, farver, corrgram, caTools, cowplot, randomForest, RMariaDB, lubridate, zoo, scales, ggfortify, forecast, doParallel,e1071)
+```
+
+Parallel computing using multiple cores:
+```{r}
+
+#cl <- makeCluster(5)
+#registerDoParallel(cl)
+## Here you put the processes
+#stopCluster(cl)
+```
+
+
+```{r}
+df <- import("trainingData.csv")
+
+df <- within(df, MasterID <- paste("R", BUILDINGID, FLOOR, SPACEID, RELATIVEPOSITION, sep='_'))
+
+df <- select(df, -c(LONGITUDE, LATITUDE, USERID, PHONEID, TIMESTAMP))
+
+df$MasterID <- as.factor(as.character(df$MasterID))
+
+#group_indices_
+#df$MasterID
+
+```
+
+Loaded the data, created independent variable called ID that contains "FLOOR", "BUILDINGID", "SPACEID", "RELATIVEPOSITION" information.  
+Dropped useless columns like Longitude and Latitude. 
+
+```{r}
+#Random Forest
+df_modelling <- select(df, -c("BUILDINGID", "FLOOR", "SPACEID", "RELATIVEPOSITION"))
+ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3, classProbs = TRUE)
+str(df_modelling$MasterID)
+
+#cl <- makeCluster(6)
+#registerDoParallel(cl)
+#RF_Fit1 <- train(MasterID~., data = df_modelling, method = "rf", tuneLength = 1, trControl=ctrl)
+#stopCluster(cl)
+#names(df_modelling)
+```
+Even with parallel processing, the computer takes around an hour to run only one model, therefore i will only focus on one builing instead of all of them.
+
+```{r}
+#summary(as.factor(df$BUILDINGID))
+
+df_modelling2 <- filter(df, df$BUILDINGID == 0)
+df_modelling2 <- select(df_modelling2, -c("FLOOR", "SPACEID", "RELATIVEPOSITION","BUILDINGID"))
+
+str(df_modelling2$MasterID)
+#str(df_modelling2$MasterID)
+#str(df_modelling$MasterID)
+#str(df_modelling$BUILDINGID)
+#str(df_modelling2)
+```
+##Starting from Scratch
+
+```{r}
+df3 <- import("trainingData.csv")
+df3 <- filter(df3, df$BUILDINGID == 0)
+df3 <- within(df3, MasterID <- paste("R", BUILDINGID, FLOOR, SPACEID, RELATIVEPOSITION, sep='_'))
+df3 <- select(df3, -c(LONGITUDE, LATITUDE, USERID, PHONEID, TIMESTAMP, FLOOR, SPACEID, RELATIVEPOSITION,BUILDINGID))
+df3$MasterID <- as.factor(as.character(df3$MasterID))
+
+ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3, classProbs = TRUE)
+```
+
+
+```{r}
+cl <- makeCluster(7)
+registerDoParallel(cl)
+RF_Fit3 <- train(MasterID~., data = df3, method = "rf", tuneLength = 1, trControl=ctrl)
+stopCluster(cl)
+
+```
+```{r}
+RF_Fit3
+```
+
+Kappa Score is a metric that compares an Observed Accuracy with an Expected Accuracy and it is used not only to evaluate a single classifier, but also to evaluate multiple classifiers when they have been used on the same problem. In general it is less misleading than simply using accuracy as a metric; computation of Observed Accuracy and Expected Accuracy is integral to comprehension of the Kappa Score, and is most easily seen in the use of a confusion matrix.  
+
+Observed Accuracy is simply the number of instances that were classified correctly throughout the entire confusion matrix. Expected Accuracy is defined as the accuracy that any random classifier would be expected to achieve based on the confusion matrix. The Expected Accuracy is directly related to the number of instances of each class combined with the number of instances that the machine learning classifier agreed with as being ground truth.
+
+```{r}
+
+cl <- makeCluster(7)
+registerDoParallel(cl)
+C50Fit1 <- train(MasterID~., data = df3,trControl=ctrl,method="C5.0", tuneLength = 5)
+stopCluster(cl)
+```
+
+```{r}
+C50Fit1
+```
+
+
+```{r}
+cl <- makeCluster(7)
+registerDoParallel(cl)
+svmFit1 = svm( MasterID~., data = df3, scale = FALSE, kernel = "radial", cost = 5)
+stopCluster(cl)
+```
+
+```{r}
+svmFit1
+```
+
+```{r}
+cl <- makeCluster(7)
+registerDoParallel(cl)
+#svmFit2 <- train(MasterID~., data = df3, method = "svmLinear", trControl=ctrl, tuneLength = 5)
+knnFit1 <- train(MasterID~., data = df3, method = "knn", trControl = ctrl, preProcess = c("center","scale"), tuneLength = 10)
+stopCluster(cl)
+```
+```{r}
+knnFit1
+```
+
+
+```{r}
+ModelData <- resamples(list(RF = RF_Fit3, KNN = knnFit1, C50 = C50Fit1))
+summary(ModelData)
+```
+
+
