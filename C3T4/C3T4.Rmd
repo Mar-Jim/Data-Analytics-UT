@@ -1,0 +1,75 @@
+---
+title: "C3T4"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+require(pacman)
+
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, ggthemes, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, jquerylib, farver, corrgram, caTools, cowplot, randomForest, RMariaDB, lubridate, zoo, scales, ggfortify, forecast, doParallel, e1071, explore, dlookr, corrplot, arules,arulesViz)
+```
+
+```{r}
+Transactions <- read.transactions("ElectronidexTransactions2017.csv", format = "basket", sep=",", skip = 0)
+inspect(head(Transactions)) #cant use head, need inspect command for basket analysis
+```
+```{r}
+itemFrequencyPlot( Transactions, topN=20, main = 'Absolute Item Frequency Plot', type="absolute", horiz=TRUE)
+itemFrequencyPlot(Transactions, topN = 20, main = 'Relative Item Frequency Plot', type = "relative", ylab = "Item Frequency (Relative)")
+```
+#Finding Rules
+
+apriori!
+
+```{r}
+rules <- apriori(Transactions, parameter = list(supp = 0.001, conf = 0.8, minlen=2, maxlen=5), control=list(verbose=FALSE))
+```
+
+```{r}
+rules
+inspect(rules[1:5])
+```
+
+Count = #baskets that satify rule  
+Support = fraction of baskets that satisfy rule or fraction of baskets that have all items referenced in rule  
+Confidence = (posterior) probability that cart has item on RHS given it has all items on LHS of rule  
+coverage = fraction baskets that have all items in the LHS of rule.  
+lift = how many times more likely that item in RHS appears in a cart when it contains all items in LHS  
+RHS = right hand side  
+LHS = left hand side  
+
+```{r}
+#Sorting by quality measure
+inspect( sort(rules, by="lift", decreasing=TRUE)[1:5])
+```
+
+
+```{r}
+inspect( sort(rules, by="confidence", decreasing=TRUE)[1:5])
+```
+```{r}
+redundant<-is.redundant(rules)
+redundant
+```
+```{r}
+items <- itemFrequency(Transactions)
+sorted<-sort(items,decreasing=TRUE)
+Frequency<-sorted[1:20]
+barchart(Frequency)
+```
+
+
+```{r}
+#Visualize them
+
+simplerules <- sort(rules, by="lift")[c(1:8)]
+plot(simplerules, method="graph")
+#plot(simplerules, method="graph", engine="htmlwidget")
+```
+
+```{r}
+
+```
+
