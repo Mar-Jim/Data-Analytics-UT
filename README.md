@@ -31,13 +31,13 @@ ___
 
 * Acquire, process, and **analyze extremely large data sets** using cloud-based data mining methods to discover patterns or do data exploration.
 
-#### <ins> Course Agenda </ins>
+#### <ins> Course Summary </ins>
 
 
-Examining Customer Demographics | Predicting Customer Preferences | Data Analytis and Visualization
------------- | ------------- | ------------
-Python  | R | R
-Identify which customer attributes relate significantly to customer default rates and to build a predictive model that the business can use to classify potential customers ‘at-risk’.| Use machine learning methods to predict which brand of computer products customers prefer based on customer demographics, and then to determine associations between products that can be used to drive sales-oriented initiatives. | 1) Modeling patterns of energy usage by time of day and day of the year in a typical residence whose electrical system is monitored by multiple sub-meters. <br /> 2) Determining a person’s physical position in a multi-building indoor space using wifi fingerprinting.
+Course 1 <br /> Examining Customer Demographics | Course 2 <br />Predicting Customer Preferences | Course 3 <br />Data Analytis and Visualization
+:------------: | :-------------: | :------------:
+Python         |      R          |       R 
+1\) Perform Exploratory Data Analysis on customer demographics data using numpy, pandas, matplotlib, and GGplot.<br /> <br /> 2) Identify which customer attributes relate significantly to customer default rates and to build a predictive model that the business can use to classify potential customers ‘at-risk’.| 1) Use machine learning methods to predict which brand of computer products customers prefer based on customer demographics. <br /> <br /> 2) Determine associations between products that can be used to drive sales-oriented initiatives. | 1) Modeling patterns of energy usage by time of day and day of the year in a typical residence whose electrical system is monitored by multiple sub-meters. <br /> <br /> 2) Determining a person’s physical position in a multi-building indoor space using wifi fingerprinting.
 
 
 *Marcelo Jimenez*
