@@ -10,7 +10,7 @@ Right after graduation and over the summer of 2021, I worked towards this Data A
 Below is a Summary of the aim and results of the various projects I completed. The complete description and lines of code are located inside this repository and are linked in this summary.
 ___
 
-#### <ins> Course Objectives and Outcomes </ins>
+### <ins> Course Objectives and Outcomes </ins>
 
 
 * Identify types of business problems for which data analysis can provide significant insights in support of **business decision-making**.
@@ -31,7 +31,7 @@ ___
 
 * Acquire, process, and **analyze extremely large data sets** using cloud-based data mining methods to discover patterns or do data exploration.
 
-#### <ins> Course Summary </ins>
+### <ins> Course Summary </ins>
 
 
 Course 1 <br /> Examining Customer Demographics | Course 2 <br />Predicting Customer Preferences | Course 3 <br />Data Analytis and Visualization
