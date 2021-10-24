@@ -4,6 +4,7 @@
 ### by Marcelo Jimenez, Petroleum Engineering Graduate from The University of Texas at Austin 🤘
 
 ___
+### <ins> Introduction </ins>
 
 Right after graduation and over the summer of 2021, I worked towards this Data Analytics certificate as I wanted to broaden my skill set. Coding and Data Analysis always intrigued me and decided to deepen my knowledge so that I could one day use it in the Petroleum Engineering industry. This Repository coresponds to all the projects I did in Python and R to complete my certificate. 
 
@@ -34,10 +35,23 @@ ___
 ### <ins> Course Summary </ins>
 
 
-Course 1 <br /> Examining Customer Demographics | Course 2 <br />Predicting Customer Preferences | Course 3 <br />Data Analytis and Visualization
-:------------: | :-------------: | :------------:
-Python         |      R          |       R 
+Course 1 <br /> Examining Customer Demographics | Course 2 <br />Predicting Customer Preferences | Course 3 <br />Data Analysis and Visualization | Course 4 <br /> Data Science & Big Data
+:------------: | :-------------: | :------------:|:------------:|
+Python         |      R          |       R       |   AWS & R
 1\) Perform Exploratory Data Analysis on customer demographics data using numpy, pandas, matplotlib, and GGplot.<br /> <br /> 2) Identify which customer attributes relate significantly to customer default rates and to build a predictive model that the business can use to classify potential customers ‘at-risk’.| 1) Use machine learning methods to predict which brand of computer products customers prefer based on customer demographics. <br /> <br /> 2) Determine associations between products that can be used to drive sales-oriented initiatives. | 1) Modeling patterns of energy usage by time of day and day of the year in a typical residence whose electrical system is monitored by multiple sub-meters. <br /> <br /> 2) Determining a person’s physical position in a multi-building indoor space using wifi fingerprinting.
+
+### <ins> Highlights </ins>
+
+#### Course 1 - Examining Customre Demographics
+
+
+#### Course 2 - Predicting Customer Preferences
+
+
+#### Course 3 - Data Analysis and Visualization
+
+
+#### Course 4 - Data Science & Big Data
 
 
 *Marcelo Jimenez*
