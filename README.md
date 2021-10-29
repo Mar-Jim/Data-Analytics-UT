@@ -78,21 +78,21 @@ sns.heatmap – for correlation visualization
 ```
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png" height="30">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png" height="150">
 </a>
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png" height="30">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png" height="150">
 </a>
 
 EDA
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA1.png" height="30">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA1.png" height="200">
 </a>
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA2.jpg">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA2.jpg" height="30">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA2.jpg" height="200">
 </a>
 
 Pandas Profiling
