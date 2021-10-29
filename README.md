@@ -44,7 +44,14 @@ Python         |      R          |       R       |   AWS & R
 
 #### Course 1 - Examining Customer Demographics
 
-
+![This Image](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png)
+![Image 2](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png)
+![Image 3](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png)
+![Image 4](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA1.png)
+![Image 5](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA2.jpg)
+![Image 6](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA3.png)
+![Image 7](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pred1.png)
+![Image 8](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pred2.png)
 
 #### Course 2 - Predicting Customer Preferences
 
