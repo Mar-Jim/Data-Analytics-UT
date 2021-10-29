@@ -62,7 +62,7 @@ rfc_model = rfc.fit(X_train, y_train.values.ravel())     #.ravel() converts arra
 ```
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png" height="30">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png" height="300">
 </a>
 
 Simple correlation
