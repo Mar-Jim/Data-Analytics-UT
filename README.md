@@ -60,6 +60,19 @@ dtc_model = dtc.fit(X_train, y_train)
 rfc = RandomForestClassifier(n_estimators=500, n_jobs=2, random_state=0)   #.values gives the values in an array of shape (n,1)
 rfc_model = rfc.fit(X_train, y_train.values.ravel())     #.ravel() converts array to shape (n,)
 ```
+<style>
+    img {
+        width: 100%;
+        transition: .8s;
+    }
+    img:hover {
+        transform: scale(1.1);
+    }
+    div {
+        overflow: hidden;
+        width: 400px;
+    }
+</style>
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png">
   <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png" height="300">
@@ -78,11 +91,11 @@ sns.heatmap – for correlation visualization
 ```
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png" height="150">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png" height="200">
 </a>
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png" height="150">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png" height="200">
 </a>
 
 EDA
