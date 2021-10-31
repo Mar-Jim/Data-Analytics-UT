@@ -44,8 +44,8 @@ Python         |      R          |       R       |   AWS & R
 
 #### Course 1 - Examining Customer Demographics
 
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python.gif">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python.gif" height="300">
+<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif" height="300">
 </a>
 
 Importing Data
@@ -110,10 +110,9 @@ Accuracy =  0.6038167938931298
 
 #### Course 2 - Predicting Customer Preferences
 
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot.gif">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot.gif" height="300">
+<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif" height="300">
 </a>
-
 
 
 #### Course 3 - Data Analysis and Visualization
