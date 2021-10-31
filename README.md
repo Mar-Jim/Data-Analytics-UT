@@ -44,6 +44,10 @@ Python         |      R          |       R       |   AWS & R
 
 #### Course 1 - Examining Customer Demographics
 
+<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python.gif">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python.gif" height="300">
+</a>
+
 Importing Data
 
 ```
@@ -60,23 +64,6 @@ dtc_model = dtc.fit(X_train, y_train)
 rfc = RandomForestClassifier(n_estimators=500, n_jobs=2, random_state=0)   #.values gives the values in an array of shape (n,1)
 rfc_model = rfc.fit(X_train, y_train.values.ravel())     #.ravel() converts array to shape (n,)
 ```
-<style>
-    img {
-        width: 100%;
-        transition: .8s;
-    }
-    img:hover {
-        transform: scale(1.1);
-    }
-    div {
-        overflow: hidden;
-        width: 400px;
-    }
-</style>
-
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Mod1.png" height="300">
-</a>
 
 Simple correlation
 ```
@@ -90,33 +77,12 @@ from sklearn import tree – for Decision tree visualization
 sns.heatmap – for correlation visualization
 ```
 
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred1.png" height="200">
-</a>
-
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/1Pred2.png" height="200">
-</a>
-
 EDA
-
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA1.png" height="200">
-</a>
-
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA2.jpg">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA2.jpg" height="200">
-</a>
 
 Pandas Profiling
 ```
 pandas_profiling.ProfileReport(df)
 ```
-
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA3.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/EDA3.png" height="30">
-</a>
-
 Prediction
 ```
 y = amount_default
@@ -141,16 +107,14 @@ metrics.accuracy_score(y2_test, not_default_pred)
 Accuracy =  0.6038167938931298
 ```
 
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pred1.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pred1.png" height="30">
-</a>
-
-
-<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pred2.png">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pred2.png" height="30">
-</a>
 
 #### Course 2 - Predicting Customer Preferences
+
+</style>
+
+<a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot.gif">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot.gif" height="300">
+</a>
 
 
 #### Course 3 - Data Analysis and Visualization
