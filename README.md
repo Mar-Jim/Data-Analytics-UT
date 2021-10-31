@@ -45,7 +45,7 @@ Python         |      R          |       R       |   AWS & R
 #### Course 1 - Examining Customer Demographics
 
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">
-  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif" height="300">
+  <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">
 </a>
 
 Importing Data
