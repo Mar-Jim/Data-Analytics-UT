@@ -110,11 +110,10 @@ Accuracy =  0.6038167938931298
 
 #### Course 2 - Predicting Customer Preferences
 
-</style>
-
 <a href="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot.gif">
   <img src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot.gif" height="300">
 </a>
+
 
 
 #### Course 3 - Data Analysis and Visualization
