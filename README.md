@@ -62,8 +62,8 @@ Python         |      R          |       R       |   AWS & R
 <br>
 <br>
 Learning GGplot and multiple graph styles  
-[pure code](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/OnlyCode.md) and
-[pdf.](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/GGplot.pdf)
+[pure code](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/Only%20Code.pdf) and
+[pdf.](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/GGplot.pdf)
 <br>
 <br>
 <br>
@@ -89,7 +89,17 @@ Learning GGplot and multiple graph styles
 
 #### Course 3 - Data Analysis and Visualization
 
+[<img align="right" width="55%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course3.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course3.gif)
+<br>
+<br>
+[Connecting to Data Base "Maria" and pulling data into R]()  
+[Data Processing]()  
+[Initial EDA]()  
 
+<br>
+<br>
+<br>
+<br>
 #### Course 4 - Data Science & Big Data
 
 
