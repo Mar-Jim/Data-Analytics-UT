@@ -85,6 +85,7 @@ Learning GGplot and multiple graph styles
 <br>
 <br>
 <br>
+<br>
 
 #### Course 3 - Data Analysis and Visualization
 
