@@ -61,7 +61,9 @@ Python         |      R          |       R       |   AWS & R
 <br>
 <br>
 <br>
-[Learning GGplot and multiple graph styles](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/OnlyCode.md)
+Learning GGplot and multiple graph styles  
+[pure code](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/OnlyCode.md) and
+[pdf.](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/GGplot.pdf)
 <br>
 <br>
 <br>
