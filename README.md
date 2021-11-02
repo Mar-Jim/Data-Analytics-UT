@@ -6,7 +6,7 @@
 ___
 ### <ins> Introduction </ins>
 
-Right after graduation and over the summer of 2021, I worked towards this Data Analytics certificate as I wanted to broaden my skill set. Coding and Data Analysis always intrigued me and decided to deepen my knowledge so that I could one day use it in the Petroleum Engineering industry. This Repository coresponds to all the projects I did in Python and R to complete my certificate. 
+Right after graduation and over the summer of 2021, I worked towards this Data Analytics certificate as I wanted to broaden my skill set. Coding and Data Analysis always intrigued me and I decided to deepen my knowledge so that I could one day use it in the Petroleum Engineering industry. This Repository coresponds to all the projects I did in Python and R to complete my certificate. 
 
 Below is a Summary of the aim and results of the various projects I completed. The complete description and lines of code are located inside this repository and are linked in this summary.
 ___
