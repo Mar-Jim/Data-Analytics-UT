@@ -70,8 +70,22 @@ Learning GGplot and multiple graph styles
 <br>
 <br>
 <br>
-
-
+[<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course2.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course2.gif)
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 #### Course 3 - Data Analysis and Visualization
 
 
