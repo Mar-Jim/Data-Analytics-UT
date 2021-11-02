@@ -49,7 +49,7 @@ Python         |      R          |       R       |   AWS & R
 <br>
 <br>
 [Importing Data](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Importing%20Data.rtf)  
-[Decision Tree & Random Forest](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/DT%20and%20RF.rtf)  
+[Decision Tree & Random Forest](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/DT%20and%20RF.md)  
 [Pandas Profiling](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
 [Correlations & Confusion Matrix](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
 [Predictions](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
