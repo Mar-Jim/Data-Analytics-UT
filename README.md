@@ -54,7 +54,7 @@ Python         |      R          |       R       |   AWS & R
 [Correlations & Confusion Matrix](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
 [Predictions](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
 <br>
-
+<br>
 #### Course 2 - Predicting Customer Preferences
 
 [<img align="right" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif)
