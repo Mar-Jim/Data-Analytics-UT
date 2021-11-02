@@ -48,17 +48,26 @@ Python         |      R          |       R       |   AWS & R
 <br>
 <br>
 <br>
-[Importing Data](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Importing%20Data.rtf)  
+[Importing Data](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Importing%20Data.md)  
 [Decision Tree & Random Forest](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/DT%20and%20RF.md)  
-[Pandas Profiling](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
-[Correlations & Confusion Matrix](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
-[Predictions](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
+[Pandas Profiling](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
+[Correlations & Confusion Matrix](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
+[Predictions](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
 <br>
 
 #### Course 2 - Predicting Customer Preferences
 
 [<img align="right" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif)
-
+<br>
+<br>
+<br>
+[Learning GGplot and multiple graph styles](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Only%20Code.pdf)
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 #### Course 3 - Data Analysis and Visualization
 
 
