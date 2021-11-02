@@ -44,69 +44,16 @@ Python         |      R          |       R       |   AWS & R
 
 #### Course 1 - Examining Customer Demographics
 
-[<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif)
-
-[Pandas Profiling]("pandas_profiling.ProfileReport(df)")
-
-Importing Data
-
-```
-all_data = pd.read_csv("./Demographic_Data.csv")
-all_data.head()                      
-```
-
-Decision Tree & Random Forest
-
-```
-dtc = DecisionTreeClassifier(max_depth=5)
-dtc_model = dtc.fit(X_train, y_train)
-
-rfc = RandomForestClassifier(n_estimators=500, n_jobs=2, random_state=0)   #.values gives the values in an array of shape (n,1)
-rfc_model = rfc.fit(X_train, y_train.values.ravel())     #.ravel() converts array to shape (n,)
-```
-
-Simple correlation
-```
-corr_mat = all_data.corr()   #checking for correlation just incase (realtionships between features)
-print(corr_mat)
-```
-Visualizations
-
-```
-from sklearn import tree – for Decision tree visualization
-sns.heatmap – for correlation visualization
-```
-
-EDA
-
-Pandas Profiling
-```
-pandas_profiling.ProfileReport(df)
-```
-Prediction
-```
-y = amount_default
-y2 = amount_not_default
-X = only_default[only_default.columns.difference(['LIMIT_BAL'])]
-X2 = only_not_default[only_not_default.columns.difference(['LIMIT_BAL'])]
-
-X1_train, X1_test, y1_train, y1_test = train_test_split(X, y, test_size=0.20, random_state=123)
-X2_train, X2_test, y2_train, y2_test = train_test_split(X2, y2, test_size=0.20, random_state=123)
-
-rfc = RandomForestClassifier(n_estimators=200, n_jobs=2, random_state=0)   #.values gives the values in an array of shape (n,1)
-default_model = rfc.fit(X1_train, y1_train.values.ravel())     #.ravel() converts array to shape (n,)
-not_default_model = rfc.fit(X2_train, y2_train.values.ravel())
-
-default_pred = default_model.predict(X1_test)
-not_default_pred = not_default_model.predict(X2_test)
-
-metrics.accuracy_score(y1_test, default_pred)
-Accuracy =  0.36814276272306673
-
-metrics.accuracy_score(y2_test, not_default_pred)
-Accuracy =  0.6038167938931298
-```
-
+[<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif)  
+<br>
+<br>
+<br>
+[Importing Data](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Importing%20Data.rtf)  
+[Decision Tree & Random Forest](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/DT%20and%20RF.rtf)  
+[Pandas Profiling](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
+[Correlations & Confusion Matrix](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
+[Predictions](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.rtf)  
+<br>
 
 #### Course 2 - Predicting Customer Preferences
 
