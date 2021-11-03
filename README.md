@@ -100,7 +100,12 @@ Learning GGplot and multiple graph styles
 <br>
 <br>
 <br>
+
 #### Course 4 - Data Science & Big Data
 
 
 *Marcelo Jimenez*
+
+
+
+[<img align="center" width="60%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif)
