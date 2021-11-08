@@ -104,8 +104,15 @@ Learning GGplot and multiple graph styles
 #### Course 4 - Data Science & Big Data
 
 
+
+#### Honorable Mentions - Reservoir Modelling
+
+
+[<img align="right" width="60%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif)
+
+<br>
+<br>
+<br>
+To the right is the reservoir subsurface model I created for our Senior Design project. 
+
 *Marcelo Jimenez*
-
-
-
-[<img align="center" width="60%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif)
