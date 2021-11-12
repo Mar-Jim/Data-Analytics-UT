@@ -47,12 +47,13 @@ Python         |      R          |       R       |   AWS & R
 [<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif)  
 <br>
 <br>
-<br>
-[Importing Data](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Importing%20Data.md)  
-[Decision Tree & Random Forest](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/DT%20and%20RF.md)  
-[Pandas Profiling](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
-[Correlations & Confusion Matrix](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
-[Predictions](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Data%20Analytics/Pandas%20Profiling.md)  
+
+Decision Tree & Random Forest  
+Pandas Profiling  
+Correlations & Confusion Matrix  
+
+[All Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/All_Code_Course_1.ipynb) & 
+[Project Report](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Final%20Report.pdf)
 <br>
 <br>
 #### Course 2 - Predicting Customer Preferences
@@ -62,8 +63,8 @@ Python         |      R          |       R       |   AWS & R
 <br>
 <br>
 Learning GGplot and multiple graph styles  
-[pure code](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/Only%20Code.pdf) and
-[pdf.](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/GGplot.pdf)
+[All Code](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/Only%20Code.pdf) and
+[PDF Report](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/GGplot.pdf)
 <br>
 <br>
 <br>
