@@ -51,7 +51,7 @@ Used Decision Tree & Random Forest algorithms to create regression and classific
 
 [All Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/All_Code_Course_1.ipynb) , 
 [Project Report](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Final%20Report.pdf) , & 
-[Decision Tree visualization]()
+[Decision Tree visualization](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Desicion_Tree_Project.ipynb)
 <br>
 <br>
 <br>
