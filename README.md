@@ -42,7 +42,8 @@ Python         |      R          |       R       |   AWS & R
 
 ### <ins> Highlights </ins>
 
-#### <span style="color:blue">Course 1</span> - Examining Customer Demographics
+### Course 1 - Examining Customer Demographics
+
 [<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif)  
 <br>
 <br>
@@ -56,7 +57,7 @@ Used Decision Tree & Random Forest algorithms to create regression and classific
 <br>
 <br>
 <br>
-#### <span style="color:blue">Course 2</span> - Predicting Customer Preferences
+### Course 2 - Predicting Customer Preferences
 
 [<img align="right" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif)
 <br>
@@ -75,7 +76,6 @@ Learned fundamentals and theory behind GGplot and multiple graph styles for futu
 
 <br>
 <br>
-<br>
 
 Used pacman to import essential libraries into R. Learn to train and test Random Forest models with different set of parameters. Found Variable importance and error rate of my model. Created and visualized rules for a market basket analysis.  
   
@@ -90,7 +90,7 @@ Used pacman to import essential libraries into R. Learn to train and test Random
 <br>
 <br>
 
-#### <span style="color:blue">Course 3</span> - Data Analysis and Visualization
+### Course 3 - Data Analysis and Visualization
 
 [<img align="right" width="55%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course3.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course3.gif)
 <br>
@@ -104,13 +104,13 @@ Modeled patterns of energy usage by time of day and day of the year for resident
 <br>
 <br>
 
-#### <span style="color:blue">Course 4</span> - Data Science & Big Data
+### <span style="color:blue">Course 4</span> - Data Science & Big Data
 
 Master fundamentals of scaling up data analysis to a large cloud computing platform (AWS). Worked with map-reduce-based systems and leveraged the computing power of the cloud to prepare very large data sets for analysis. The code reflects the data modelling of a small sample data, used to then work with the enourmous data matrix created from cloud computing.  
   
 [All Code]()
 
-#### <span style="color:blue">Honorable Mentions</span> - Reservoir Modelling
+#### Honorable Mentions - Reservoir Modelling
 
 
 [<img align="right" width="60%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif)
