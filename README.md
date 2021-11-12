@@ -102,7 +102,9 @@ Modeled patterns of energy usage by time of day and day of the year for resident
 
 #### <span style="color:blue">Course 4</span> - Data Science & Big Data
 
-
+Master fundamentals of scaling up data analysis to a large cloud computing platform (AWS). Worked with map-reduce-based systems and leveraged the computing power of the cloud to prepare very large data sets for analysis. The code reflects the data modelling of a small sample data, used to then work with the enourmous data matrix created from cloud computing.  
+  
+[All Code]()
 
 #### <span style="color:blue">Honorable Mentions</span> - Reservoir Modelling
 
