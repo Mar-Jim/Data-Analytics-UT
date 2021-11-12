@@ -76,12 +76,9 @@ Learned fundamentals and theory behind GGplot and multiple graph styles for futu
 <br>
 <br>
 
-[Importing Data]()  
-[Modelling]()  
-[Error Rate of Random Forest]()  
-[Variable Importance]()  
-[Predictions]()  
-[Basket Analysis]()  
+Used pacman to import essential libraries into R. Learn to train and test Random Forest models with different set of parameters. Found Variable importance and error rate of my model. Created and visualized rules for a market basket analysis.  
+[All Code]()  
+
 <br>
 <br>
 <br>
