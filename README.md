@@ -14,23 +14,23 @@ ___
 ### <ins> Course Objectives and Outcomes </ins>
 
 
-* Identify types of business problems for which data analysis can provide significant insights in support of **business decision-making**.
+* Identify types of business problems for which data analysis can provide significant insights in support of <span style="color:red">**business decision-making**</span>.
 
-* Translate business objectives into analytical opportunities using **data mining**.
+* Translate business objectives into analytical opportunities using <span style="color:red">**data mining**</span>.
 
-* Select and justify **appropriate types of data** analysis and statistical procedures
+* Select and justify <span style="color:red">**appropriate types of data**</span> analysis and statistical procedures
 
-* Apply **data analytics in eCommerce** (e.g., understanding customer behavior, segmenting customers by key demographic factors, selecting new products strategically and predicting their profitability).
+* Apply <span style="color:red">**data analytics in eCommerce**</span> (e.g., understanding customer behavior, segmenting customers by key demographic factors, selecting new products strategically and predicting their profitability).
 
-* Become broadly competent in the use and evaluation of **statistical machine learning techniques** of classification, regression and association.
+* Become broadly competent in the use and evaluation of <span style="color:red">**statistical machine learning techniques**</span> of classification, regression and association.
 
-* Apply **dimensionality reduction** methods to broad datasets to reduce their complexity prior to modelling
+* Apply <span style="color:red">**dimensionality reduction**</span> methods to broad datasets to reduce their complexity prior to modelling
 
-* Identify and solve collinearity through feature engineering and **feature selection**
+* Identify and solve collinearity through feature engineering and <span style="color:red">**feature selection**</span>
 
-* Interpret the results of data analysis to **make models and predictions** and to establish the reliability of those predictions.
+* Interpret the results of data analysis to <span style="color:red">**make models and predictions**</span> and to establish the reliability of those predictions.
 
-* Acquire, process, and **analyze extremely large data sets** using cloud-based data mining methods to discover patterns or do data exploration.
+* Acquire, process, and <span style="color:red">**analyze extremely large data sets**</span> using cloud-based data mining methods to discover patterns or do data exploration.
 
 ### <ins> Course Summary </ins>
 
@@ -42,7 +42,7 @@ Python         |      R          |       R       |   AWS & R
 
 ### <ins> Highlights </ins>
 
-#### Course 1 - Examining Customer Demographics
+#### <span style="color:blue">Course 1</span> - Examining Customer Demographics
 [<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif)  
 <br>
 <br>
@@ -55,7 +55,7 @@ Used Decision Tree & Random Forest algorithms to create regression and classific
 <br>
 <br>
 <br>
-#### Course 2 - Predicting Customer Preferences
+#### <span style="color:blue">Course 2</span> - Predicting Customer Preferences
 
 [<img align="right" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif)
 <br>
@@ -84,7 +84,7 @@ Used pacman to import essential libraries into R. Learn to train and test Random
 <br>
 <br>
 
-#### Course 3 - Data Analysis and Visualization
+#### <span style="color:blue">Course 3</span> - Data Analysis and Visualization
 
 [<img align="right" width="55%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course3.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Course3.gif)
 <br>
@@ -98,11 +98,11 @@ Used pacman to import essential libraries into R. Learn to train and test Random
 <br>
 <br>
 
-#### Course 4 - Data Science & Big Data
+#### <span style="color:blue">Course 4</span> - Data Science & Big Data
 
 
 
-#### Honorable Mentions - Reservoir Modelling
+#### <span style="color:blue">Honorable Mentions</span> - Reservoir Modelling
 
 
 [<img align="right" width="60%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif)
