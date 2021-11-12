@@ -78,7 +78,11 @@ Learned fundamentals and theory behind GGplot and multiple graph styles for futu
 <br>
 
 Used pacman to import essential libraries into R. Learn to train and test Random Forest models with different set of parameters. Found Variable importance and error rate of my model. Created and visualized rules for a market basket analysis.  
-[All Code]()  
+  
+[Familiarizing myself with R]()  
+[Modelling Customer Preferences](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T2/C3T2.pdf),
+[Sales Data Anlysis](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T3/C3T3.pdf),
+[Basket Analysis](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T4/C3T4.pdf)  
 
 <br>
 <br>
@@ -116,6 +120,7 @@ Master fundamentals of scaling up data analysis to a large cloud computing platf
 <br>
 
 To the right is the reservoir subsurface model I created for our Senior Design project. It models Oil-bearing sands in the South Texas Frio reservior. They are truncated sands against a salt dome & trapped by overlying Anahuac Shale.  
+  
 [All Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Senior_Design_Project.ipynb)
 
 *Marcelo Jimenez*

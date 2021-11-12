@@ -1,6 +1,7 @@
 ---
 title: "Data Analytics C3T1"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -23,6 +24,9 @@ I became familiar with a couple of shortcuts to make life easier:
 snippet plt  
 	ggplot(${1:data}) +   
 		geom_${2:geom}(aes(${3:aes}),${4:colour})
+		
+tinytex::install_tinytex()
+
 ```  
 		
 (@) you can skip letters when trying to use auto fill to find the functions faster  
