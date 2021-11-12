@@ -87,8 +87,6 @@ Used pacman to import essential libraries into R. Learn to train and test Random
 <br>
 <br>
 <br>
-<br>
-<br>
 
 ### Course 3 - Data Analysis and Visualization
 
