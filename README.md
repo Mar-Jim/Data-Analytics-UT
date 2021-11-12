@@ -79,10 +79,10 @@ Learned fundamentals and theory behind GGplot and multiple graph styles for futu
 
 Used pacman to import essential libraries into R. Learn to train and test Random Forest models with different set of parameters. Found Variable importance and error rate of my model. Created and visualized rules for a market basket analysis.  
   
-[Familiarizing myself with R]()  
+[Familiarizing myself with R](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T1/C3T1.pdf), 
 [Modelling Customer Preferences](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T2/C3T2.pdf),
 [Sales Data Anlysis](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T3/C3T3.pdf),
-[Basket Analysis](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T4/C3T4.pdf)  
+[Basket Analysis](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Modelling%20and%20Predictions/C3T4/C3T4.pdf).
 
 <br>
 <br>
