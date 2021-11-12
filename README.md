@@ -108,7 +108,7 @@ Master fundamentals of scaling up data analysis to a large cloud computing platf
   
 [All Code]()
 
-#### Honorable Mentions - Reservoir Modelling
+### Honorable Mentions - Reservoir Modelling
 
 
 [<img align="right" width="60%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Res.gif)
