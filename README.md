@@ -95,7 +95,7 @@ Used pacman to import essential libraries into R. Learn to train and test Random
 <br>
 Modeled patterns of energy usage by time of day and day of the year for residential aptms. Performed an 'analytical deep dive' of sub-metering generated data and producing high quality visualizations. Determined a person’s physical position in a multi-building indoor space using wifi fingerprinting.  
 
-[Part 1]() , [Part 2]() , [Part 3]()
+[Part 1]() , [Wifi Fingerprinting]()
 
 <br>
 <br>
