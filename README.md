@@ -61,7 +61,7 @@ Used Decision Tree & Random Forest algorithms to create regression and classific
 <br>
 <br>
 <br>
-Learning GGplot and multiple graph styles  
+Learned fundamentals and theory behind GGplot and multiple graph styles for future uses.    
 [All Code](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/Only%20Code.pdf) and
 [PDF Report](https://github.com/Mar-Jim/Mar-Jim/blob/main/Assets/Data%20Analytics/GGplot.pdf)
 <br>
