@@ -56,6 +56,8 @@ Correlations & Confusion Matrix
 [Project Report](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Final%20Report.pdf)
 <br>
 <br>
+<br>
+<br>
 #### Course 2 - Predicting Customer Preferences
 
 [<img align="right" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/GGPlot1.gif)
