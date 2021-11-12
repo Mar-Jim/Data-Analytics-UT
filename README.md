@@ -43,8 +43,8 @@ Python         |      R          |       R       |   AWS & R
 ### <ins> Highlights </ins>
 
 #### Course 1 - Examining Customer Demographics
-
 [<img align="left" width="50%" src="https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif">](https://raw.githubusercontent.com/Mar-Jim/Mar-Jim/main/Assets/Gifs/Python1.gif)  
+<br>
 <br>
 Utilized pandas profiling and other EDA methods for initial analysis. 
 Used Decision Tree & Random Forest algorithms to create regression and classification models. Created Correlations & Confusion Matrix to visualize predictions.
