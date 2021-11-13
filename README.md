@@ -104,9 +104,13 @@ Sub-metering Analysis [Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/m
 
 ### <span style="color:blue">Course 4</span> - Data Science & Big Data
 
+[<img align="left" width="55%" src="https://raw.githubusercontent.com/Mar-Jim/Data-Analytics-UT/main/Data%20Analytics%20-%20R/Working%20With%20Big%20Data%20-%20AWS/AWS.gif">](https://raw.githubusercontent.com/Mar-Jim/Data-Analytics-UT/main/Data%20Analytics%20-%20R/Working%20With%20Big%20Data%20-%20AWS/AWS.gif)
+
+
+
 Master fundamentals of scaling up data analysis to a large cloud computing platform (AWS). Worked with map-reduce-based systems and leveraged the computing power of the cloud to prepare very large data sets for analysis. The code reflects the data modelling of a small sample data, used to then work with the enourmous data matrix created from cloud computing.  
   
-[All Code]()
+[All Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Working%20With%20Big%20Data%20-%20AWS/C5T3.Rmd), [PDF of Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Working%20With%20Big%20Data%20-%20AWS/C5T3.pdf), & [Report](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Analytics%20-%20R/Working%20With%20Big%20Data%20-%20AWS/Final%20Report.pdf)
 
 ### Honorable Mentions - Reservoir Modelling
 
