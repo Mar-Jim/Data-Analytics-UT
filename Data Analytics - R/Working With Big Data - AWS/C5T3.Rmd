@@ -1,0 +1,423 @@
+---
+title: "C5T3"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+require(pacman)
+
+pacman:: p_load(pacman, dplyr, GGally, ggplot2, ggrepel, patchwork, gifski, ggforce, ggthemes, maps, sf, concaveman, remotes, readxl, ggthemes, ggvis, httr, plotly, rmarkdown, extrafont, shiny, isoband, stringr, rio, tidyr, labeling, caret, jquerylib, farver, corrgram, caTools, cowplot, randomForest, RMariaDB, lubridate, zoo, scales, ggfortify, forecast, doParallel,e1071,C50,kknn)
+```
+## Importing and Feature Selection
+
+First step is to import the data and select the features that only apply to each phone.
+
+###Original Data
+```{r}
+df_iphone <- import("iphone_smallmatrix_labeled_8d.csv")
+df_samsung <- import("galaxy_smallmatrix_labeled_9d.csv")
+```
+
+### Histogram for EDA
+
+```{r}
+#plot_ly(df_iphone, x= ~df_iphone$iphonesentiment, type='histogram')
+#plot_ly(df_samsung, x= ~df_samsung$galaxysentiment, type='histogram')
+```
+Where:  
+0: Sentiment Unclear  
+1: very negative  
+2: somewhat negative  
+3: neutral  
+4: somewhat positive  
+5: very positive  
+
+###Domain Expertise Feature Selection
+```{r}
+df_iphoneDE <- select(df_iphone, c(ios, iphonecampos, iphonecamneg, iphonecamunc, iphonedispos, iphonedisneg, iphonedisunc, iphoneperpos,iphoneperneg,iphoneperunc,iosperpos,iosperneg,iosperunc,iphonesentiment))
+
+df_samsungDE <- select(df_samsung, c(googleandroid, samsungcampos, samsungcamneg, samsungcamunc, samsungdispos, samsungdisneg, samsungdisunc, samsungperpos,samsungperneg,samsungperunc,googleperpos,googleperneg,googleperunc,galaxysentiment))
+```
+
+###Correlation Feature Selection
+```{r}
+Corrmatrix = cor(df_iphone)
+Corrmatrix2 = cor(df_samsung)
+
+#findCorrelation(Corrmatrix, cutoff = .8, verbose = TRUE, names = TRUE)
+#findCorrelation(Corrmatrix2, cutoff = .8, verbose = TRUE, names = TRUE)
+
+df_iphoneCOR <- select(df_iphone, c(samsungdisneg, samsungperneg, samsungdispos, htcdisneg,googleperneg, googleperpos, samsungdisunc, samsungcamunc, htcperpos,nokiacamunc,  nokiadisneg, nokiadispos, nokiaperunc, nokiacampos, nokiadisunc,nokiaperneg,nokiacamneg,iphonedisneg, 
+iphonedispos,sonydispos, iosperunc, iosperneg, ios, htcphone,iphonesentiment))
+
+df_samsungCOR <- select(df_samsung,c(samsungdisneg,samsungperneg,samsungdispos,htcdisneg,googleperneg,googleperpos,samsungdisunc,samsungcamunc,htcperpos,nokiacamunc,nokiadisneg,nokiadispos,nokiaperunc,nokiacampos,nokiadisunc,nokiaperneg,nokiacamneg,iphonedisneg,iphonedispos,sonyperpos,iosperunc,iosperneg,sonydisneg,ios,htcphone,galaxysentiment))
+
+```
+
+###NZV Feature Selection
+
+Near zero variance feature selection
+
+```{r}
+nzv_iphone <- nearZeroVar(df_iphone, saveMetrics = FALSE)
+nzv_samsung <- nearZeroVar(df_samsung, saveMetrics = FALSE)
+
+df_iphoneNZV <- df_iphone[,-nzv_iphone]
+df_samsungNZV <- df_samsung[,-nzv_samsung]
+
+#str(df_iphoneNZV)
+#str(df_samsungNZV)
+
+```
+
+### RFE Feature Selection 
+
+Let's sample the data before using RFE
+```{r}
+set.seed(123)
+iphoneSample <- df_iphone[sample(1:nrow(df_iphone), 1000, replace=FALSE),]
+samsungSample <- df_samsung[sample(1:nrow(df_samsung), 1000, replace=FALSE),]
+```
+
+Set up rfeControl with randomforest, repeated cross validation and no updates
+```{r}
+ctrl <- rfeControl(functions = rfFuncs, method = "repeatedcv", repeats = 5, verbose = FALSE)
+```
+
+
+```{r}
+
+#cl <- makeCluster(7)
+#registerDoParallel(cl)
+
+# Use rfe and omit the response variable (attribute 59 iphonesentiment) 
+rfeResults_iphone <- rfe(iphoneSample[,1:58], iphoneSample$iphonesentiment, sizes=(1:58), rfeControl=ctrl)
+rfeResults_samsung <- rfe(samsungSample[,1:58], samsungSample$galaxysentiment, sizes=(1:58), rfeControl=ctrl)
+```
+
+
+```{r}
+# Get results
+rfeResults_iphone
+rfeResults_samsung
+```
+
+```{r}
+#plot(rfeResults_iphone, type=c("g", "o"))
+#plot(rfeResults_samsung, type=c("g", "o"))
+```
+
+```{r}
+# create new data set with rfe recommended features
+df_iphoneRFE <- df_iphone[,predictors(rfeResults_iphone)]
+df_samsungRFE <- df_samsung[,predictors(rfeResults_samsung)]
+
+# add the dependent variable to iphoneRFE
+df_iphoneRFE$iphonesentiment <- df_iphone$iphonesentiment
+df_samsungRFE$galaxysentiment <- df_samsung$galaxysentiment
+
+
+```
+
+## All Data Sets
+
+df_iphone  Original Data  
+df_samsung  
+
+df_iphoneDE  Domain Expertise  
+df_samsungDE  
+
+df_iphoneCOR  Correlation  
+df_samsungCOR  
+
+df_iphoneNZV  Near zero variance feature selection  
+df_samsungNZV  
+
+df_iphoneRFE  Recursive Feature Elimination  
+df_samsungRFE  
+
+```{r}
+df_iphone$iphonesentiment <- factor(df_iphone$iphonesentiment)
+df_samsung$galaxysentiment <- factor(df_samsung$galaxysentiment)
+
+df_iphoneDE$iphonesentiment <- factor(df_iphoneDE$iphonesentiment)
+df_samsungDE$galaxysentiment <- factor(df_samsungDE$galaxysentiment)
+
+df_iphoneCOR$iphonesentiment <- factor(df_iphoneCOR$iphonesentiment)
+df_samsungCOR$galaxysentiment <- factor(df_samsungCOR$galaxysentiment)
+
+df_iphoneNZV$iphonesentiment <- factor(df_iphoneNZV$iphonesentiment)
+df_samsungNZV$galaxysentiment <- factor(df_samsungNZV$galaxysentiment)
+
+df_iphoneRFE$iphonesentiment <- factor(df_iphoneRFE$iphonesentiment)
+df_samsungRFE$galaxysentiment <- factor(df_samsungRFE$galaxysentiment)
+```
+
+
+## Model Development
+
+Models with non-feature selected datasets and then feature selected data sets.
+C5.0, Random Forest, SVM, kknn
+
+```{r}
+set.seed(123)
+
+#iPhone
+
+inTrain <- createDataPartition(df_iphone$iphonesentiment, p=.70, list = FALSE)
+training_iphone <- df_iphone[ inTrain,]
+testing_iphone  <- df_iphone[-inTrain,]
+
+inTrain <- createDataPartition(df_iphoneDE$iphonesentiment, p=.70, list = FALSE)
+training_iphoneDE <- df_iphoneDE[ inTrain,]
+testing_iphoneDE  <- df_iphoneDE[-inTrain,]
+
+inTrain <- createDataPartition(df_iphoneCOR$iphonesentiment, p=.70, list = FALSE)
+training_iphoneCOR <- df_iphoneCOR[ inTrain,]
+testing_iphoneCOR  <- df_iphoneCOR[-inTrain,]
+
+inTrain <- createDataPartition(df_iphoneNZV$iphonesentiment, p=.70, list = FALSE)
+training_iphoneNZV <- df_iphoneNZV[ inTrain,]
+testing_iphoneNZV  <- df_iphoneNZV[-inTrain,]
+
+inTrain <- createDataPartition(df_iphoneRFE$iphonesentiment, p=.70, list = FALSE)
+training_iphoneRFE <- df_iphoneRFE[ inTrain,]
+testing_iphoneRFE  <- df_iphoneRFE[-inTrain,]
+
+#Samsung
+
+inTrain <- createDataPartition(df_samsung$galaxysentiment, p=.70, list = FALSE)
+training_samsung <- df_samsung[ inTrain,]
+testing_samsung  <- df_samsung[-inTrain,]
+
+inTrain <- createDataPartition(df_samsungDE$galaxysentiment, p=.70, list = FALSE)
+training_samsungDE <- df_samsungDE[ inTrain,]
+testing_samsungDE  <- df_samsungDE[-inTrain,]
+
+inTrain <- createDataPartition(df_samsungCOR$galaxysentiment, p=.70, list = FALSE)
+training_samsungCOR <- df_samsungCOR[ inTrain,]
+testing_samsungCOR  <- df_samsungCOR[-inTrain,]
+
+inTrain <- createDataPartition(df_samsungNZV$galaxysentiment, p=.70, list = FALSE)
+training_samsungNZV <- df_samsungNZV[ inTrain,]
+testing_samsungNZV  <- df_samsungNZV[-inTrain,]
+
+inTrain <- createDataPartition(df_samsungRFE$galaxysentiment, p=.70, list = FALSE)
+training_samsungRFE <- df_samsungRFE[ inTrain,]
+testing_samsungRFE  <- df_samsungRFE[-inTrain,]
+```
+
+####Original Data Models
+```{r}
+
+#cl <- makeCluster(7)
+#registerDoParallel(cl)
+
+ctrl <- trainControl(method = "repeatedcv", number = 5, repeats = 3)
+
+
+RF_iphone_Original <- train(iphonesentiment~., data = training_iphone, method = "rf",trControl=ctrl, tuneLength = 1)
+RF_samsung_Original <- train(galaxysentiment~., data = training_samsung, method = "rf",trControl=ctrl, tuneLength = 1)
+
+SVM_iphone_Original <- train(iphonesentiment~., data = training_iphone, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+SVM_samsung_Original <- train(galaxysentiment~., data = training_samsung, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+
+C50_iphone_Original <- train(iphonesentiment~., data = training_iphone,method="C5.0",trControl=ctrl, tuneLength = 3)
+C50_samsung_Original <- train(galaxysentiment~., data = training_samsung,method="C5.0",trControl=ctrl, tuneLength = 3)
+
+kknn_iphone_Original<- train(iphonesentiment~., data = training_iphone, method = "kknn", trControl = ctrl, tuneLength = 3)
+kknn_samsung_Original <- train(galaxysentiment~., data = training_samsung, method = "kknn", trControl = ctrl, tuneLength = 3)
+```
+
+###Predictions
+```{r}
+RF_pred_iphone <- predict(RF_iphone_Original, newdata = testing_iphone)
+C50_pred_iphone <- predict(C50_iphone_Original, newdata = testing_iphone)
+SVM_pred_iphone <- predict(SVM_iphone_Original, newdata = testing_iphone)
+KKNN_pred_iphone <- predict(kknn_iphone_Original, newdata = testing_iphone)
+
+RF_pred_samsung <- predict(RF_samsung_Original, newdata = testing_samsung)
+C50_pred_samsung <- predict(C50_samsung_Original, newdata = testing_samsung)
+SVM_pred_samsung <- predict(SVM_samsung_Original, newdata = testing_samsung)
+KKNN_pred_samsung <- predict(kknn_samsung_Original, newdata = testing_samsung)
+```
+
+```{r}
+#Building a confusion matrix and using the predict function yields a similar accuracy and kappa
+#result than the resampling function. Since resampling summarises these metrics in a simpler
+#manner, i will use resampling but will leave this matrix as an example. 
+
+cmRF_iphone <- confusionMatrix(RF_pred_iphone, testing_iphone$iphonesentiment)
+cmRF_samsung <- confusionMatrix(RF_pred_samsung, testing_samsung$galaxysentiment)
+
+cmRF_iphone
+cmRF_samsung
+```
+
+#### Original Data Results
+```{r}
+ModelData_samsung <- resamples(list(RF_iphone = RF_iphone_Original, KKNN_iphone = kknn_iphone_Original, C50_iphone = C50_iphone_Original, SVM_iphone = SVM_iphone_Original, RF_Samsung = RF_samsung_Original, KKNN_Samsung = kknn_samsung_Original, C50_Samsung = C50_samsung_Original, SVM_Samsung = SVM_samsung_Original))
+
+summary(ModelData_samsung)
+```
+
+###Feture Selected Data Set
+
+```{r}
+#RFE Feature Selection
+
+RF_iphone_RFE <- train(iphonesentiment~., data = training_iphoneRFE, method = "rf",trControl=ctrl, tuneLength = 1)
+RF_samsung_RFE <- train(galaxysentiment~., data = training_samsungRFE, method = "rf",trControl=ctrl, tuneLength = 1)
+
+SVM_iphone_RFE <- train(iphonesentiment~., data = training_iphoneRFE, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+SVM_samsung_RFE <- train(galaxysentiment~., data = training_samsungRFE, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+
+C50_iphone_RFE <- train(iphonesentiment~., data = training_iphoneRFE,method="C5.0",trControl=ctrl, tuneLength = 3)
+C50_samsung_RFE <- train(galaxysentiment~., data = training_samsungRFE,method="C5.0",trControl=ctrl, tuneLength = 3)
+
+kknn_iphone_RFE<- train(iphonesentiment~., data = training_iphoneRFE, method = "kknn", trControl = ctrl, tuneLength = 3)
+kknn_samsung_RFE <- train(galaxysentiment~., data = training_samsungRFE, method = "kknn", trControl = ctrl, tuneLength = 3)
+
+#NZV Feature Selection
+
+RF_iphone_NZV <- train(iphonesentiment~., data = training_iphoneNZV, method = "rf",trControl=ctrl, tuneLength = 1)
+RF_samsung_NZV <- train(galaxysentiment~., data = training_samsungNZV, method = "rf",trControl=ctrl, tuneLength = 1)
+
+SVM_iphone_NZV <- train(iphonesentiment~., data = training_iphoneNZV, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+SVM_samsung_NZV <- train(galaxysentiment~., data = training_samsungNZV, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+
+C50_iphone_NZV <- train(iphonesentiment~., data = training_iphoneNZV,method="C5.0",trControl=ctrl, tuneLength = 3)
+C50_samsung_NZV <- train(galaxysentiment~., data = training_samsungNZV,method="C5.0",trControl=ctrl, tuneLength = 3)
+
+kknn_iphone_NZV<- train(iphonesentiment~., data = training_iphoneNZV, method = "kknn", trControl = ctrl, tuneLength = 3)
+kknn_samsung_NZV <- train(galaxysentiment~., data = training_samsungNZV, method = "kknn", trControl = ctrl, tuneLength = 3)
+```
+
+```{r}
+#COR Feature Selection
+
+RF_iphone_COR <- train(iphonesentiment~., data = training_iphoneCOR, method = "rf",trControl=ctrl, tuneLength = 1)
+RF_samsung_COR <- train(galaxysentiment~., data = training_samsungCOR, method = "rf",trControl=ctrl, tuneLength = 1)
+
+SVM_iphone_COR <- train(iphonesentiment~., data = training_iphoneCOR, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+SVM_samsung_COR <- train(galaxysentiment~., data = training_samsungCOR, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+
+C50_iphone_COR <- train(iphonesentiment~., data = training_iphoneCOR,method="C5.0",trControl=ctrl, tuneLength = 3)
+C50_samsung_COR <- train(galaxysentiment~., data = training_samsungCOR,method="C5.0",trControl=ctrl, tuneLength = 3)
+
+kknn_iphone_COR<- train(iphonesentiment~., data = training_iphoneCOR, method = "kknn", trControl = ctrl, tuneLength = 3)
+kknn_samsung_COR <- train(galaxysentiment~., data = training_samsungCOR, method = "kknn", trControl = ctrl, tuneLength = 3)
+
+#DE Feature Selection
+
+RF_iphone_DE <- train(iphonesentiment~., data = training_iphoneDE, method = "rf",trControl=ctrl, tuneLength = 1)
+RF_samsung_DE <- train(galaxysentiment~., data = training_samsungDE, method = "rf",trControl=ctrl, tuneLength = 1)
+
+SVM_iphone_DE <- train(iphonesentiment~., data = training_iphoneDE, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+SVM_samsung_DE <- train(galaxysentiment~., data = training_samsungDE, method = "svmLinear",trControl=ctrl, tuneLength = 3)
+
+C50_iphone_DE <- train(iphonesentiment~., data = training_iphoneDE,method="C5.0",trControl=ctrl, tuneLength = 3)
+C50_samsung_DE <- train(galaxysentiment~., data = training_samsungDE,method="C5.0",trControl=ctrl, tuneLength = 3)
+
+kknn_iphone_DE<- train(iphonesentiment~., data = training_iphoneDE, method = "kknn", trControl = ctrl, tuneLength = 3)
+kknn_samsung_DE <- train(galaxysentiment~., data = training_samsungDE, method = "kknn", trControl = ctrl, tuneLength = 3)
+```
+
+
+###All Results
+```{r}
+
+ModelData_All_iPhone <- resamples(list(RF_iphone=RF_iphone_Original, 
+                                    RF_iphone_DE=RF_iphone_DE, 
+                                    RF_iphone_COR=RF_iphone_COR, 
+                                    RF_iphone_NZV=RF_iphone_NZV, 
+                                    RF_iphone_RFE=RF_iphone_RFE,
+                                    
+                                    C50_iphone=C50_iphone_Original, 
+                                    C50_iphone_DE=C50_iphone_DE, 
+                                    C50_iphone_COR=C50_iphone_COR, 
+                                    C50_iphone_NZV=C50_iphone_NZV, 
+                                    C50_iphone_RFE=C50_iphone_RFE,
+                                    
+                                    SVM_iphone=SVM_iphone_Original, 
+                                    SVM_iphone_DE=SVM_iphone_DE, 
+                                    SVM_iphone_COR=SVM_iphone_COR, 
+                                    SVM_iphone_NZV=SVM_iphone_NZV, 
+                                    SVM_iphone_RFE=SVM_iphone_RFE,
+                                    
+                                    kknn_iphone=kknn_iphone_Original, 
+                                    kknn_iphone_DE=kknn_iphone_DE, 
+                                    kknn_iphone_COR=kknn_iphone_COR, 
+                                    kknn_iphone_NZV=kknn_iphone_NZV, 
+                                    kknn_iphone_RFE=kknn_iphone_RFE
+                                    ))
+
+ModelData_All_Samsung <- resamples(list(RF_samsung=RF_samsung_Original, 
+                                    RF_samsung_DE=RF_samsung_DE, 
+                                    RF_samsung_COR=RF_samsung_COR, 
+                                    RF_samsung_NZV=RF_samsung_NZV, 
+                                    RF_samsung_RFE=RF_samsung_RFE,
+                                    
+                                    C50_samsung=C50_samsung_Original, 
+                                    C50_samsung_DE=C50_samsung_DE, 
+                                    C50_samsung_COR=C50_samsung_COR, 
+                                    C50_samsung_NZV=C50_samsung_NZV, 
+                                    C50_samsung_RFE=C50_samsung_RFE,
+                                    
+                                    SVM_samsung=SVM_samsung_Original, 
+                                    SVM_samsung_DE=SVM_samsung_DE, 
+                                    SVM_samsung_COR=SVM_samsung_COR, 
+                                    SVM_samsung_NZV=SVM_samsung_NZV, 
+                                    SVM_samsung_RFE=SVM_samsung_RFE,
+                                    
+                                    kknn_samsung=kknn_samsung_Original, 
+                                    kknn_samsung_DE=kknn_samsung_DE, 
+                                    kknn_samsung_COR=kknn_samsung_COR, 
+                                    kknn_samsung_NZV=kknn_samsung_NZV, 
+                                    kknn_samsung_RFE=kknn_samsung_RFE
+                                    ))
+
+```
+
+```{r}
+summary(ModelData_All_iPhone)
+```
+
+```{r}
+summary(ModelData_All_Samsung)
+```
+
+##Large Matrices
+
+
+```{r}
+dfLM_iphone <- import("LargeMatrix_iphone.csv")
+dfLM_samsung <- import("LargeMatrix_samsung.csv")
+
+dfLM_iphoneRFE <- dfLM_iphone[,predictors(rfeResults_iphone)]
+dfLM_iphoneRFE$iphonesentiment <- dfLM_iphone$iphonesentiment
+
+#No feature selection for Samsung
+
+LM_Pred_iphone <- predict(RF_iphone_RFE, newdata = dfLM_iphoneRFE)
+LM_Pred_Samsung <- predict(C50_samsung_Original, newdata = dfLM_samsung)
+```
+
+```{r}
+summary(LM_Pred_iphone)
+```
+
+```{r}
+summary(LM_Pred_Samsung)
+```
+
+```{r}
+summary(df_iphone$iphonesentiment)
+```
+
+```{r}
+summary(df_samsung$galaxysentiment)
+```
+
