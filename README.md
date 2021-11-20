@@ -91,8 +91,6 @@ Sub-metering Analysis [Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/m
 
 <br>
 <br>
-<br>
-<br>
 
 ### <span style="color:blue">Course 4</span> - Data Science & Big Data
 
