@@ -32,14 +32,6 @@ ___
 
 * Acquire, process, and <span style="color:red">**analyze extremely large data sets**</span> using cloud-based data mining methods to discover patterns or do data exploration.
 
-### <ins> Course Summary </ins>
-
-
-Course 1 <br /> Examining Customer Demographics | Course 2 <br />Predicting Customer Preferences | Course 3 <br />Data Analysis and Visualization | Course 4 <br /> Data Science & Big Data
-:------------: | :-------------: | :------------:|:-------------:|
-Python         |      R          |       R       |   AWS & R
-1\) Perform Exploratory Data Analysis on customer demographics data using numpy, pandas, seaborn, and matplotlib.<br /> <br /> 2) Identify which customer attributes relate significantly to customer default rates and to build a predictive model that the business can use to classify potential customers ‘at-risk’.| 1) Use machine learning methods to predict which brand of computer products customers prefer based on customer demographics. <br /> <br /> 2) Determine associations between products that can be used to drive sales-oriented initiatives. | 1) Modeling patterns of energy usage by time of day and day of the year in a typical residence whose electrical system is monitored by multiple sub-meters. <br /> <br /> 2) Determining a person’s physical position in a multi-building indoor space using wifi fingerprinting. | 1) Use AWS Elastic Map Reduce (EMR) platform to collect large amounts of smart-phone preference data from the Common Crawl, then compile it into a single data matrix. <br /> <br /> 2) Use hand assesed smart phone sentiment data matrices to develop predictive models and then apply these models to the data collected.
-
 ### <ins> Highlights </ins>
 
 ### Course 1 - Examining Customer Demographics
@@ -124,5 +116,14 @@ Master fundamentals of scaling up data analysis to a large cloud computing platf
 To the right is the reservoir subsurface model I created for our Senior Design project. It models Oil-bearing sands in the South Texas Frio reservior. They are truncated sands against a salt dome & trapped by overlying Anahuac Shale.  
   
 [All Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Senior_Design_Project.ipynb)
+
+### <ins> Course Summary </ins>
+
+
+Course 1 <br /> Examining Customer Demographics | Course 2 <br />Predicting Customer Preferences | Course 3 <br />Data Analysis and Visualization | Course 4 <br /> Data Science & Big Data
+:------------: | :-------------: | :------------:|:-------------:|
+Python         |      R          |       R       |   AWS & R
+1\) Perform Exploratory Data Analysis on customer demographics data using numpy, pandas, seaborn, and matplotlib.<br /> <br /> 2) Identify which customer attributes relate significantly to customer default rates and to build a predictive model that the business can use to classify potential customers ‘at-risk’.| 1) Use machine learning methods to predict which brand of computer products customers prefer based on customer demographics. <br /> <br /> 2) Determine associations between products that can be used to drive sales-oriented initiatives. | 1) Modeling patterns of energy usage by time of day and day of the year in a typical residence whose electrical system is monitored by multiple sub-meters. <br /> <br /> 2) Determining a person’s physical position in a multi-building indoor space using wifi fingerprinting. | 1) Use AWS Elastic Map Reduce (EMR) platform to collect large amounts of smart-phone preference data from the Common Crawl, then compile it into a single data matrix. <br /> <br /> 2) Use hand assesed smart phone sentiment data matrices to develop predictive models and then apply these models to the data collected.
+
 
 *Marcelo Jimenez*
