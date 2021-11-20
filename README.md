@@ -117,6 +117,10 @@ To the right is the reservoir subsurface model I created for our Senior Design p
   
 [All Code](https://github.com/Mar-Jim/Data-Analytics-UT/blob/main/Data%20Science%20-%20Python/Senior_Design_Project.ipynb)
 
+<br>
+<br>
+<br>
+
 ### <ins> Course Summary </ins>
 
 
